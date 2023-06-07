@@ -1,5 +1,5 @@
 Pesquisa de Opinião - README
-TESTE
+
 Este projeto consiste em um programa Python para coleta de respostas de uma pesquisa de opinião e gravação dessas respostas em um arquivo CSV. O programa foi desenvolvido de forma simples e sem a utilização de bibliotecas adicionais.
 Instruções de Uso
 
