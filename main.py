@@ -1,40 +1,48 @@
 # main.py
 # Gravação das respostas em um arquivo CSV usando classes (sem usar bibliotecas)
 
+import csv
+from datetime import datetime
+
 class Pesquisa:
     def __init__(self, perguntas):
         self.perguntas = perguntas
         self.respostas = []
+        self.cabecalho = ["Idade", "Gênero"] + perguntas + ["Data", "Hora"]
 
     def coletar_respostas(self):
-        for pergunta in self.perguntas:
-            resposta = input(f"{pergunta} (1-Sim / 2-Não / 3-Não sei): ")
+        while True:
+            idade = input("Informe a idade (ou '00' para sair): ")
+            if idade == "00":
+                break
+
+            genero = input("Informe o gênero: ")
+
+            respostas_perguntas = []
+            for pergunta in self.perguntas:
+                resposta = input(f"{pergunta} (1-Sim / 2-Não / 3-Não sei): ")
+                respostas_perguntas.append(resposta)
+
+            data_hora = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+            resposta = [idade, genero] + respostas_perguntas + [data_hora]
             self.respostas.append(resposta)
 
     def gravar_respostas_csv(self):
-        # Formatação das respostas como uma linha CSV
-        linha_csv = ','.join(self.respostas) + '\n'
-
-        # Gravação das respostas em um arquivo CSV
         nome_arquivo = "respostas.csv"
 
-        # Verificar se o arquivo já existe
-        arquivo_existe = False
-        try:
-            with open(nome_arquivo, "r"):
-                arquivo_existe = True
-        except FileNotFoundError:
-            arquivo_existe = False
+        with open(nome_arquivo, "a", newline="") as arquivo_csv:
+            writer = csv.writer(arquivo_csv)
+            
+            # Verificar se o arquivo está vazio
+            arquivo_vazio = arquivo_csv.tell() == 0
+            
+            # Escrever o cabeçalho se o arquivo estiver vazio
+            if arquivo_vazio:
+                writer.writerow(self.cabecalho)
 
-        # Escrever o cabeçalho se o arquivo não existir
-        if not arquivo_existe:
-            cabecalho = ','.join(self.perguntas) + '\n'
-            with open(nome_arquivo, "w") as arquivo_csv:
-                arquivo_csv.write(cabecalho)
-
-        # Adicionar as respostas
-        with open(nome_arquivo, "a") as arquivo_csv:
-            arquivo_csv.write(linha_csv)
+            # Adicionar as respostas
+            writer.writerows(self.respostas)
 
         print("Respostas gravadas com sucesso no arquivo CSV.")
 
