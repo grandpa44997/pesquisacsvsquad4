@@ -18,6 +18,22 @@ linha_csv = ','.join(respostas) + '\n'
 
 # Gravação das respostas em um arquivo CSV
 nome_arquivo = "respostas.csv"
+
+# Verificar se o arquivo já existe
+arquivo_existe = False
+try:
+    with open(nome_arquivo, "r"):
+        arquivo_existe = True
+except FileNotFoundError:
+    arquivo_existe = False
+
+# Escrever o cabeçalho se o arquivo não existir
+if not arquivo_existe:
+    with open(nome_arquivo, "w") as arquivo_csv:
+        cabecalho = ','.join(perguntas) + '\n'
+        arquivo_csv.write(cabecalho)
+
+# Adicionar as respostas
 with open(nome_arquivo, "a") as arquivo_csv:
     arquivo_csv.write(linha_csv)
 
