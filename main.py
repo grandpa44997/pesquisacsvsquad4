@@ -8,10 +8,7 @@ perguntas = [
     "Você se sente confortável com estatísticas?"
 ]
 
-respostas = []
-for pergunta in perguntas:
-    resposta = input(f"{pergunta} (1-Sim / 2-Não / 3-Não sei): ")
-    respostas.append(resposta)
+respostas = [input(f"{pergunta} (1-Sim / 2-Não / 3-Não sei): ") for pergunta in perguntas]
 
 # Formatação das respostas como uma linha CSV
 linha_csv = ','.join(respostas) + '\n'
@@ -44,4 +41,3 @@ print("Respostas gravadas com sucesso no arquivo CSV.")
 Esse programa realiza uma pesquisa com 4 perguntas e grava as respostas em um arquivo CSV.
 As perguntas são exibidas sequencialmente, e o usuário deve responder com 1 para Sim, 2 para Não, ou 3 para Não sei.
 As respostas são gravadas em um arquivo CSV chamado 'respostas.csv'.
-"""
