@@ -3,13 +3,15 @@ import csv
 # main.py
 # Gravação das respostas em um arquivo CSV
 
-pergunta1 = "Você gosta de programar?"
-pergunta2 = "Você está estudando Python?"
-pergunta3 = "Você já trabalhou com análise de dados?"
-pergunta4 = "Você se sente confortável com estatísticas?"
+perguntas = [
+    "Você gosta de programar?",
+    "Você está estudando Python?",
+    "Você já trabalhou com análise de dados?",
+    "Você se sente confortável com estatísticas?"
+]
 
 respostas = []
-for pergunta in [pergunta1, pergunta2, pergunta3, pergunta4]:
+for pergunta in perguntas:
     resposta = input(f"{pergunta} (1-Sim / 2-Não / 3-Não sei): ")
     respostas.append(resposta)
 
