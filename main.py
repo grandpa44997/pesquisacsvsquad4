@@ -1,5 +1,5 @@
 # main.py
-# Gravação das respostas em um arquivo CSV usando classes (sem usar bibliotecas)
+# Gravação das respostas em um arquivo CSV usando classes
 
 import csv
 from datetime import datetime
@@ -23,7 +23,7 @@ class Pesquisa:
                 resposta = input(f"{pergunta} (1-Sim / 2-Não / 3-Não sei): ")
                 respostas_perguntas.append(resposta)
 
-            data_hora = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            data_hora = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
 
             resposta = [idade, genero] + respostas_perguntas + [data_hora]
             self.respostas.append(resposta)
