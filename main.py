@@ -12,20 +12,25 @@ class Pesquisa:
 
     def coletar_respostas(self):
         while True:
-            idade = input("Informe a idade (ou '00' para sair): ")
+            print('_'*50)
+            idade = input("Informe a idade (ou 00 para sair): ")
             if idade == "00":
                 break
+            
+            nome = input('Informe seu nome: ')
 
-            genero = input("Informe o gênero: ")
+            genero = input("Informe o gênero (1 - masculino, 2 - feminino, 3 - outro): ")
 
             respostas_perguntas = []
             for pergunta in self.perguntas:
-                resposta = input(f"{pergunta} (1-Sim / 2-Não / 3-Não sei): ")
+                resposta = input(f"{pergunta}: ")
                 respostas_perguntas.append(resposta)
 
+            feedback = str(input('Gostaria de deixar alguma sugestão de melhoria na plataforma? '))
             data_hora = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
 
-            resposta = [idade, genero] + respostas_perguntas + [data_hora]
+            # resposta = [nome, idade, genero] + respostas_perguntas + [data_hora]
+            resposta = [nome, idade, genero] + respostas_perguntas + [feedback] + [data_hora]
             self.respostas.append(resposta)
 
     def gravar_respostas_csv(self):
@@ -48,10 +53,15 @@ class Pesquisa:
 
 # Criação do objeto de pesquisa
 perguntas = [
-    "Você gosta de programar?",
-    "Você está estudando Python?",
-    "Você já trabalhou com análise de dados?",
-    "Você se sente confortável com estatísticas?"
+    "Qual é o seu modal de entrega? \n(1 - Carro, 2 - Moto ou 3 - Bicicleta)",
+    
+    "Você enfrenta dificuldades para encontrar endereços de entrega com seu modal de entrega? \n(1 - Sim, 2 - Não, 3 - Não sei)",
+
+    "Você acredita que o valor pago pelas entregas é justo considerando seu modal de entrega? \n(1 - Sim, 2 - Não, 3 - Não sei)",
+    
+    "Você considera o trabalho de entregador uma opção viável de renda com seu modal de entrega? \n(1 - Sim, 2 - Não, 3 - Não sei)",
+
+    "Você recomendaria o trabalho de entregador para outras pessoas com seu modal de entrega? \n(1 - Sim, 2 - Não, 3 - Não sei)"
 ]
 pesquisa = Pesquisa(perguntas)
 
